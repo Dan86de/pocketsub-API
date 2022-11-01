@@ -18,8 +18,6 @@ export class UsersService {
     });
   }
 
-  //TODO dopracować endpointy dla usera i zrobić auth flow dla aplikacji
-
   async updateUser(params: {
     where: Prisma.UserWhereUniqueInput;
     data: Prisma.UserUpdateInput;
