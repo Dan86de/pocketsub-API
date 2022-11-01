@@ -40,3 +40,5 @@ export class UsersController {
     });
   }
 }
+
+//TODO working on users endpoints and make auth flow for app
