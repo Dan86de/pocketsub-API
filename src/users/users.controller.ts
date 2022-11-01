@@ -2,6 +2,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -25,6 +26,17 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() createUserDto: Prisma.UserCreateInput) {
-    return this.userService.createUser(createUserDto);
+    const createdUserData = await this.userService.createUser(createUserDto);
+    return new UserEntity({
+      ...createdUserData,
+    });
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') id: string) {
+    const deletedUser = await this.userService.deleteUser({ id });
+    return new UserEntity({
+      ...deletedUser,
+    });
   }
 }
