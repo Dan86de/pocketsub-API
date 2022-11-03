@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserEntity } from './users/user-entity';
+import { UserEntity } from './auth/users/user-entity';
 
 @Injectable()
 export class UserInterceptor<T> implements NestInterceptor<T, UserEntity> {

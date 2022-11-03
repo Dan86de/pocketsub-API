@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { envValidationSchema } from './config/envValidation.config';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
-import { PrismaService } from './prisma.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -12,8 +10,9 @@ import { PrismaService } from './prisma.service';
       envFilePath: [`.env.${process.env.NODE_ENV}`],
       validationSchema: envValidationSchema,
     }),
+    AuthModule,
   ],
-  controllers: [UsersController],
-  providers: [UsersService, PrismaService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
