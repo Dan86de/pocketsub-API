@@ -7,9 +7,10 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async getUserById(id: User['id']) {
+  async getUser(id: User['id']) {
     return this.prisma.user.findUnique({
       where: { id },
+      include: { subscriptions: true },
     });
   }
 
@@ -21,14 +22,10 @@ export class UsersService {
     });
   }
 
-  async updateUser(params: {
-    where: Prisma.UserWhereUniqueInput;
-    data: Prisma.UserUpdateInput;
-  }) {
-    const { where, data } = params;
+  async updateUser(id: string, userData: Prisma.UserUpdateInput) {
     return this.prisma.user.update({
-      data,
-      where,
+      data: userData,
+      where: { id },
     });
   }
 
