@@ -16,7 +16,8 @@ export class UsersService {
 
   async createUser(data: Prisma.UserCreateInput) {
     const userData = { ...data };
-    userData.password = await bcrypt.hash(userData.password, 10);
+    userData.password = this.hashPassword(userData.password);
+    userData.email = userData.email.trim().toLowerCase();
     return this.prisma.user.create({
       data: userData,
     });
@@ -33,5 +34,9 @@ export class UsersService {
     return this.prisma.user.delete({
       where,
     });
+  }
+
+  hashPassword(password: string) {
+    return bcrypt.hashSync(password, 8);
   }
 }
